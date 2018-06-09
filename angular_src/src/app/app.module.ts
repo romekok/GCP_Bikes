@@ -16,6 +16,9 @@ import { ValidateService } from './services/validate.service'
 import { AuthService } from './services/auth.service'
 import { FlashMessagesModule } from 'angular2-flash-messages'
 import { AuthGuard } from './guards/auth.guard'
+import { DataService } from './services/data.service';
+
+import { AgmCoreModule } from '@agm/core'
 
 const appRoutes: Routes = [
 
@@ -42,9 +45,12 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyBk3_9VxvdvdXYakP7HpwiQI6eezTrWVII"
+    })
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard, DataService] ,
   //providers: [ValidateService],
   bootstrap: [AppComponent]
 })
