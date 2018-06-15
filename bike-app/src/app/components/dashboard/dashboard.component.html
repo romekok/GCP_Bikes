@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"> -->
+
+    <title>GCP Bikes</title>
+</head>
+
+<body>
+ <div class="row">
+    <div class="col-4">
+      <table class="table table-striped">
+        <tr>
+            <th>Location </th>
+            <th>Total bikes</th>
+            <th>Available bikes</th>
+        </tr>
+        <tr *ngFor="let datarow of data">
+            <td>{{datarow.properties.label}}</td>
+            <td>{{datarow.properties.bike_racks}}</td>
+            <td>{{datarow.properties.bikes}}</td>
+        </tr>
+    </table>
+    </div>
+    <div class="col-8">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+        <agm-marker *ngFor="let datarow of data; let i=index" 
+            (markerClick)="markerClicked(datarow.properties.label,datarow.properties.bike_racks,datarow.properties.bikes, i)" 
+            [latitude]="datarow.geometry.coordinates[1]"
+            [longitude]="datarow.geometry.coordinates[0]">
+        </agm-marker>
+    </agm-map>
+    <div *ngIf="location">
+        <table class="table table-light">
+            <tr>
+                <th>Location </th>
+                <th>Total bikes</th>
+                <th>Available bikes</th>
+            </tr>
+            <tr>
+                <td>{{location}}</td>
+                <td>{{total_bikes}}</td>
+                <td>{{free_bikes}}</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+</div>
+
+
+
+</body>
+
+</html>
